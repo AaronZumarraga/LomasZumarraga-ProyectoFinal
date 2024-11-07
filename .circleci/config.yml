@@ -53,6 +53,14 @@ workflows:
       - say-hello
       - build-app
       - run-tests
+    # Configura las notificaciones para el workflow de desarrollo
+    triggers:
+      - type: slack
+        webhook: "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
+        template:
+          - "Dev Workflow Status: {{status}}"
+          - "Job: {{job_name}} | State: {{status}}"
+          - "View details at: {{build_url}}"
 
   # Workflow de producción
   prod-workflow:
@@ -60,3 +68,11 @@ workflows:
       - build-app
       - run-tests
       - deploy
+    # Configura las notificaciones para el workflow de producción
+    triggers:
+      - type: slack
+        webhook: "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
+        template:
+          - "Prod Workflow Status: {{status}}"
+          - "Job: {{job_name}} | State: {{status}}"
+          - "View details at: {{build_url}}"
